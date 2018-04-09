@@ -1,0 +1,195 @@
+@import './../../variables.scss';
+
+:host {
+    height: 100%;
+    width: 100%;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    display: inline-flex;
+    min-height: 100%;
+    width: 100%;
+}
+
+.currentDay {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Lato', sans-serif_bold;
+    color: $main;
+    margin-left: 7%;
+    width: 64%;
+    text-align: center;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+    
+    .date {
+        cursor: pointer;
+        min-width: 250px;
+    }
+}
+
+.chevron {
+    color: grey;
+    cursor: pointer;
+    width: 70px;
+}
+
+.notes {
+    margin-top: 3%;
+    min-height: 100%;
+    width: 71%;
+    background-image: repeating-linear-gradient(white, white 30px, #cccccc26 30px, #cccccc26 32px, white 32px);
+
+    textarea, textarea:focus {
+        font-family: 'Lato', sans-serif;
+        color: grey;
+        outline: 0;
+        border: none;
+        background-color: transparent;
+        resize: none;
+        width: 88%;
+        height: 98%;
+        padding: 1%;
+        margin-left: 10%;
+        line-height: 32px;
+        cursor: default;
+    }
+}
+
+.margin {
+    position: absolute;
+    height: 99%;
+    background-color: #e200254d;
+    left: 8%;
+    width: 1px;
+}
+
+aside.panel {
+    height: 100%;
+    width: 26%;
+    margin-left: 1%;
+
+    .infos {
+        display: flex;
+        flex-direction: row;
+        background-color: lightgrey;
+        height: 100px;
+        overflow: hidden;
+        
+        .dateform {
+            display: none;
+        }
+
+        .datebutton {
+            font-family: 'Lato', sans-serif;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            min-width: 100px;
+            height: 100px;
+            margin-left: 1%;
+            border-width: 1px;
+            border-image: linear-gradient(to top, transparent, lightgray, transparent) 0 100%;
+            border-style: solid;
+            border-left: transparent;
+            padding: 5px;
+
+            .today {
+                color: $main;
+                font-family: 'Lato', sans-serif;
+                font-weight: bold;
+            }
+
+            .day {
+                font-size: 40px;
+                color: $second;
+            }
+
+            .month {
+                color: grey;
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+@mixin multilineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+    overflow: hidden;
+    position: relative;
+    line-height: $lineHeight;
+    max-height: $lineHeight * $lineCount; 
+    text-align: left;
+    padding-right: 1em;
+
+    &:before {
+      content: "...";
+      position: absolute;
+      right: 0px;
+      bottom: 0;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      width: 1em;
+      height: 1em;
+      margin-top: 0.2em;
+      background: $bgColor;
+    }
+  }
+
+.twoLinesEllipsis {
+    @include multilineEllipsis($lineHeight: 1.2em, $lineCount: 2, $bgColor: white);  
+}
+
+.sixLinesEllipsis {
+    @include multilineEllipsis($lineHeight: 1.2em, $lineCount: 6, $bgColor: lightgrey);  
+}
+
+.preview {
+    align-self: center;
+    margin: 0 2%;
+    color: grey;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.emptyLog {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-family: 'Lato', sans-serif_bold;
+}
+
+.history {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    margin: 10px 0;
+    padding: 5px;
+    flex-direction: column;
+    height: 50px;
+    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    color: #697288;
+    border-bottom: 2px solid lightgrey;
+    overflow: hidden;
+
+    .date {
+        color: $main;
+        cursor: pointer;
+    }
+}

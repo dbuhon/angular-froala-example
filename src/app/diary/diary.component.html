@@ -1,0 +1,41 @@
+<div *ngIf="currentLog && currentDate" class="container">
+  <div class="margin"></div>
+  <div class="currentDay">
+    <div class="chevron ion-chevron-left" (click)="changeDay(-1)"></div>
+    <div class="date">{{ getFrenchDate(currentDate) }}</div>
+    <div class="chevron ion-chevron-right" (click)="changeDay(1)"></div>
+  </div>
+
+  <div class="content">
+    <div class="notes">
+      <div [froalaEditor]="froalaOptions" [(froalaModel)]="currentLog.content"></div>
+    </div>
+
+    <aside class="panel">
+      <div *ngIf="currentLog" class="infos">
+        <mat-form-field class="dateform">
+          <input matInput [matDatepicker]="datepicker" [(ngModel)]="currentDate" (ngModelChange)="changeDateWithAnimation($event)">
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true" #datepicker></mat-datepicker>
+        </mat-form-field>
+
+        <div [@calendarAnimation]="calendarAnimation" class="datebutton" mat-raised-button (click)="datepicker.open()">
+          <div [hidden]="!isToday()" class="today">Aujourd'hui</div>
+          <div class="day">{{ currentDate.getDate() }}</div>
+          <div class="month">{{ this.getMonth(currentDate) }}</div>
+        </div>
+
+        <div *ngIf="currentLog.content != null && currentLog.content.length > 0" class="preview sixLinesEllipsis">{{ parseHTML(currentLog.content) }}</div>
+        <div *ngIf="currentLog.content == null || currentLog.content.length === 0" class="preview emptyLog">Aucune note</div>
+      </div>
+
+      <div *ngFor="let history of historyEntries">
+        <div *ngIf="history" class="history">
+          <div class="date" (click)="changeDateWithAnimation(history.date)">{{ getFrenchDate(history.date, false) }}</div>
+          <div *ngIf="history.content != null && history.content.length > 0" class="twoLinesEllipsis">{{ parseHTML(history.content) }}</div>
+          <div *ngIf="history.content == null || history.content.length === 0" class="emptyLog">Aucune note</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

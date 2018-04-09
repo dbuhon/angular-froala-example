@@ -1,0 +1,93 @@
+@import './variables.scss';
+@import '~@angular/material/theming';
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-primary: mat-palette($mat-red);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+
+.mat-simple-snackbar {
+    align-items: center;
+
+    .mat-simple-snackbar-action {
+        text-transform: none;
+        font-weight: bold;
+    }
+}
+
+app-diary {
+    .fr-toolbar {
+        z-index: 99;
+    }
+
+    .fr-element {
+        * {
+            line-height: 32px;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        h1, h2, h3, h4, h5 {
+            height: 32px;
+        }
+
+        h1 {
+            position: relative;
+            top: -5px;
+        }
+    }
+
+    .notes {
+        .fr-box {
+            margin-left: 10%;
+            font-family: 'Lato', sans-serif;
+            color: grey;
+            outline: 0;
+            border: none;
+            background-color: transparent;
+            resize: none;
+            width: 88%;
+            height: 98%;
+            padding: 1%;
+            margin-left: 10%;
+            line-height: 32px;
+            cursor: text;
+            font-size: 14px;
+        }
+        
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .fr-view img {
+            margin: 0!important;
+        }
+
+        img, iframe, video, .fr-video {
+            height: 256px;
+            width: 450px;
+        }
+    }
+}
